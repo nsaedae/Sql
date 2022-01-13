@@ -187,10 +187,31 @@ SELECT `name`, SUM(`saleprice`) FROM `Customer` AS a
 		GROUP BY a.`custid`
 			ORDER BY a.`name` ASC;
 
-#문제40. 
-#문제41. 
-#문제42. 
-#문제43. 
-#문제44. 
-#문제45. 
-#문제46. 
+#문제40. 고객의 이름과 고객이 주문한 도서의 이름을 조회하시오.
+SELECT `name`, `bookname` FROM `Book` AS a
+JOIN `Orders` AS b ON a.bookid = b.bookid
+JOIN `Customer` AS c ON b.custid = c.custid;
+
+#문제41. 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 조회하시오.
+SELECT `name`, `bookname` FROM `Book` AS a
+JOIN `Orders` AS b ON a.bookid = b.bookid
+JOIN `Customer` AS c ON b.custid = c.custid
+WHERE `price`=20000;
+
+
+#문제42. 도서를 구매하지 않은 고객을 포함하여 고객의 이름과 고객이 주문한 도서의 판매가격을 구하시오.
+SELECT `name`, `saleprice` FROM `Orders` AS a
+RIGHT JOIN `Customer` AS b ON a.custid = b.custid;
+
+#문제43. 가장 비싼 도서의 이름을 조회하시오.
+SELECT `bookname` FROM `Book` WHERE `price` = (SELECT MAX(`price`) FROM `Book`);
+
+#문제44. Book 테이블에 새로운 도서 ‘스포츠 의학’을 삽입하시오. 스포츠 의학은 한솔의학서적에서 출간했으며 가격은 90,000원이다.
+INSERT INTO `Book`(`bookid`, `bookname`,`publisher`) VALUES(11, '스포츠의학','한솔의학서적');
+
+#문제45. Customer 테이블에서 고객번호가 5인 고객의 주소를 ‘대한민국 부산’으로 변경하시오.
+UPDATE `Customer` SET `address`='대한민국 부산' WHERE `custid`=5;
+
+#문제46. Customer 테이블에서 고객번호가 5인 고객을 삭제하시오.
+DELETE FROM `Customer` WHERE `custid`=5;
+
