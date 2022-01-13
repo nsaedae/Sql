@@ -214,7 +214,10 @@ JOIN `Member`     AS b ON a.uid = b.uid
 JOIN `Department` AS c ON b.dep = c.depNo
 WHERE `year` = 2019 AND `sale` >= 50000
 GROUP BY a.`uid`
-HAVING `매출합` >= 100000;
+HAVING `매출합` >= 100000
+ORDER BY `매출합` DESC;
+
+
 
 
 
